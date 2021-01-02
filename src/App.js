@@ -6,30 +6,34 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      apps:[],
-      search:'',
+      apps: [],
+      search: '',
       sort: '',
       error: null
     }
   }
 
   setSearch(search) {
-    this.setState({search});
+    this.setState({
+      search
+    });
   }
-
   setSort(sort) {
-    this.setState({sort});
+    this.setState({
+      sort
+    });
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    const baseUrl = 'http://localhost.8000/apps';
+    //construct a URL with the query string
+    const baseUrl = 'http://localhost:8000/apps';
     const params = [];
     if (this.state.search) {
-      params.push(`search=${this.state.search}`);
+      params.push(`search = ${this.state.search}`);
     }
     if (this.state.sort) {
-      params.push(`sort=${this.state.sort}`);
+      params.push(`sort = ${this.state.sort}`)
     }
     const query = params.join('&');
     const url = `${baseUrl}?${query}`;
@@ -43,13 +47,13 @@ class App extends Component {
       })
       .then(data => {
         this.setState({
-          abbs: data,
-          error: null
+          apps: data,
+          error: null //reset errors
         });
       })
       .catch(err => {
         this.setState({
-          error: 'Could not get the apps at this time'
+          error: 'Sorry, cound not get apps at this time'
         });
       })
   }
