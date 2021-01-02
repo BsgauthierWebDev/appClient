@@ -30,10 +30,10 @@ class App extends Component {
     const baseUrl = 'http://localhost:8000/apps';
     const params = [];
     if (this.state.search) {
-      params.push(`search = ${this.state.search}`);
+      params.push(`search=${this.state.search}`);
     }
     if (this.state.sort) {
-      params.push(`sort = ${this.state.sort}`)
+      params.push(`sort=${this.state.sort}`)
     }
     const query = params.join('&');
     const url = `${baseUrl}?${query}`;
